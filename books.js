@@ -1,6 +1,8 @@
+const container = document.querySelector('.container')
 const booksContainer = document.querySelector('.books-container') 
-
 const addBookForm = document.querySelector('.add-book-form')
+const addBookBtn = document.querySelector('.add-book')
+const closeBookForm = document.querySelector('.close-book-form')
 
 let myLibrary = []
 
@@ -63,6 +65,11 @@ function showLibrary() {
     }
 }
 
+function focusMain() {
+    container.removeChild(container.querySelector('.dim'))
+    addBookForm.classList.add('hidden')
+}
+
 addBookForm.addEventListener('submit', (e) => {
     e.preventDefault()
     let data = new FormData(e.target)
@@ -70,8 +77,17 @@ addBookForm.addEventListener('submit', (e) => {
     if (data.get('read') === 'on') read = true
     addBookToLibrary(data.get('title'), data.get('author'), +data.get('pages'), read)
     showLibrary()
+    focusMain()
 })
 
+addBookBtn.addEventListener('click', () => {
+    const dim = document.createElement('div')
+    dim.className = 'dim'
+    container.appendChild(dim)
+    addBookForm.classList.remove('hidden')
+})
+
+closeBookForm.addEventListener('click', focusMain)
 
 
 

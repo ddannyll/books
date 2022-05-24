@@ -88,7 +88,19 @@ input[type="submit"]:active {
     border: 3px solid #05DCA2;
 } 
 
-.hidden  {
+.close-book-form {
+    background-color: transparent;
+    border: none;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    transform: translate(25%, -25%);
+    color: rgb(255, 78, 78);
+}
+
+.hidden {
+    display: none;
 }
 
 .dim {

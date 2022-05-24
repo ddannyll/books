@@ -1,4 +1,6 @@
-const booksContainer = document.querySelector('#books-container') 
+const booksContainer = document.querySelector('.books-container') 
+
+const addBookForm = document.querySelector('.add-book-form')
 
 let myLibrary = []
 
@@ -47,18 +49,31 @@ function createBookElement(title, author, pages, read) {
 }
 
 function showLibrary() {
+    // Reset books-container HTML
+    let book = booksContainer.lastElementChild
+    while (book) {
+        booksContainer.removeChild(book)
+        book = booksContainer.lastElementChild
+    }
+
+    // Add books to books-container HTML
     for (let book of myLibrary) {
         const bookCard = createBookElement(book.name, book.author, book.pages, book.read)
         booksContainer.appendChild(bookCard)
     }
 }
 
+addBookForm.addEventListener('submit', (e) => {
+    e.preventDefault()
+    let data = new FormData(e.target)
+    let read = false
+    if (data.get('read') === 'on') read = true
+    addBookToLibrary(data.get('title'), data.get('author'), +data.get('pages'), read)
+    showLibrary()
+})
 
-addBookToLibrary('title', 'author', 3, false)
 
-addBookToLibrary('title', 'author2', 99, false)
 
-addBookToLibrary('johns book', 'john', 99, true)
 
 showLibrary()
 

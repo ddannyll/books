@@ -7,14 +7,96 @@ h1 {
     font-weight: bold;
 }
 
+h2 {
+    font-size: 3rem;
+}
+
 h3 {
     font-size: 2rem;
 }
 
-#books-container {
+.container {
+    position: relative;
+    height: 100vh;
+    width: 100vw;
+}
+
+.books-container {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     justify-content: center;
 }
 
+.add-book-form {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.7rem;
+    z-index: 20;
+    background-color: white;
+    padding: 40px;
+    border-radius: 10px;
+}
 
+.add-book-form>input {
+    padding: 0.7rem;
+}
+
+.add-book-form input[type="checkbox"] {
+    height: 1.5rem;
+    width: 1.5rem;
+    margin: 0;
+}
+
+input[type="submit"],
+.label-input-container {
+    display: block;
+    font-size: 1.5rem;
+}
+
+.read-input-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+input[type="submit"] {
+    background-color: #05DCA2;
+    color: rgb(255, 255, 255);
+    font-weight: bold;
+    border: none;
+    height: 4rem;
+    width: 100%;
+    border-radius: 10px;
+    transition: 0.1s;
+}
+
+input[type="submit"]:hover {
+    cursor: pointer;
+}
+
+input[type="submit"]:active {
+    background-color: inherit;
+    color: #05DCA2;
+    border: 3px solid #05DCA2;
+} 
+
+.hidden  {
+}
+
+.dim {
+    background-color: #000;
+    opacity: 0.2;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+}

@@ -15,12 +15,26 @@
 </head>
 <body>
     <div class="container">
+        <div class="dim"></div>
         <div class="header">
             <h1>Books</h1>
         </div>
         <div class="main">
-            <div id="books-container"></div>
+            <button class="add-book">Add Book</button>
+            <div class="books-container"></div>
         </div>
+
+        <form class="add-book-form hidden">
+            <h2>Add new book</h2>
+            <input class="label-input-container" type="text" name="title" placeholder="Title" required>
+            <input class="label-input-container" type="text" name="author" placeholder="Author" required>
+            <input class="label-input-container" type="number" name="pages" placeholder="Pages" required>
+            <div class="label-input-container read-input-container">
+                <label for="read">Have you read it?</label>
+                <input type="checkbox" name="read">
+            </div>
+            <input type="submit">
+        </form>
     </div>
     <script src="./books.js"></script>
 </body>

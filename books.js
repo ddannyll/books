@@ -39,10 +39,30 @@ function createBookElement(title, author, pages, read) {
     pagesElem.innerText = pages + 'pages'
     bookCard.appendChild(pagesElem)
 
-    const readElem = document.createElement('button') 
-    read ? readElem.innerText = 'Unread' : readElem.innerText = 'Finish reading'
-    bookCard.appendChild(readElem)
-    
+
+    // -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+    // Read Switch Toggle
+    const readLabel = document.createElement('label')
+    readLabel.setAttribute('for', 'read')
+    readLabel.innerText = 'Has been read'
+    bookCard.appendChild(readLabel)
+
+    const readSwitch = document.createElement('div')
+    readSwitch.className = 'switch'
+
+    const readCheck = document.createElement('input') 
+    readCheck.type = 'checkbox'
+    readCheck.name = 'read'
+    readSwitch.appendChild(readCheck)
+
+    const readSlider = document.createElement('span')
+    readSlider.className = 'slider'
+    readSwitch.appendChild(readSlider)
+
+    bookCard.appendChild(readSwitch)
+
+    // -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+
     const removeBook = document.createElement('button')
     removeBook.innerText = 'Remove'
     bookCard.appendChild(removeBook)
@@ -89,6 +109,7 @@ addBookBtn.addEventListener('click', () => {
 
 closeBookForm.addEventListener('click', focusMain)
 
+addBookToLibrary('phat chronicles', 'visal ken', 420, true)
 
 
 showLibrary()

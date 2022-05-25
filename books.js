@@ -119,11 +119,6 @@ addBookBtn.addEventListener('click', () => {
 
 closeBookForm.addEventListener('click', focusMain)
 
-addBookToLibrary('phat chronicles', 'visal ken', 420, true)
-addBookToLibrary('phat chronicles the second, and the third, and the fourth, and the fifth, and the sixth', 'visal ken', 42069, false)
-addBookToLibrary('ren', 'help', 2, true)
-addBookToLibrary('Super Duper Long Text Here', 'Even More Super Duper Long Text Here It Keeps Going!', 9999999999, false)
-
 showLibrary()
 
 

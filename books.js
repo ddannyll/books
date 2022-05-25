@@ -23,20 +23,24 @@ function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(book)
 }
 
+
 function createBookElement(title, author, pages, read, id) {
     const bookCard = document.createElement('div')
     bookCard.className = 'book-card'
     
     const titleElem = document.createElement('h3')
     titleElem.innerText = title
+    titleElem.className = 'book-title'
     bookCard.appendChild(titleElem)
     
     const authorElem = document.createElement('p')
-    authorElem.innerText = author
+    authorElem.innerText = 'by ' + author
+    authorElem.className = 'book-author'
     bookCard.appendChild(authorElem)
 
     const pagesElem = document.createElement('p')
-    pagesElem.innerText = pages + 'pages'
+    pagesElem.innerText = pages + ' pages'
+    pagesElem.className = 'book-pages'
     bookCard.appendChild(pagesElem)
 
 
@@ -47,12 +51,23 @@ function createBookElement(title, author, pages, read, id) {
     switchLabel.className = 'switch'
     switchLabel.innerHTML = `<input class="switch-input" type="checkbox" id="switch-${id}"> 
                              <div class="switch-fill"><p>Unread</p><p>Read</p></div>`
+    const switchInput = switchLabel.querySelector('input')
+    if (read) switchInput.setAttribute('checked', "")
+    switchInput.addEventListener('click', () => {
+        myLibrary[id].read = switchInput.checked 
+        console.table(myLibrary)
+    })
     bookCard.appendChild(switchLabel)
 
     // -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
 
     const removeBook = document.createElement('button')
-    removeBook.innerText = 'Remove'
+    removeBook.innerHTML = '<i class="fa-regular fa-trash-can fa-2x"></i>'
+    removeBook.className = 'book-remove'
+    removeBook.addEventListener('click', ()=> {
+        myLibrary.splice(id, 1)
+        showLibrary()
+    })
     bookCard.appendChild(removeBook)
 
     return bookCard
@@ -71,11 +86,11 @@ function showLibrary() {
         book = myLibrary[i]
         const bookCard = createBookElement(book.name, book.author, book.pages, book.read, i)
         booksContainer.appendChild(bookCard)
-
     }
 }
 
-function focusMain() {
+function focusMain(e) {
+    e.preventDefault()
     container.removeChild(container.querySelector('.dim'))
     addBookForm.classList.add('hidden')
 }
@@ -101,10 +116,13 @@ addBookBtn.addEventListener('click', () => {
     addBookForm.classList.remove('hidden')
 })
 
+
 closeBookForm.addEventListener('click', focusMain)
 
 addBookToLibrary('phat chronicles', 'visal ken', 420, true)
-
+addBookToLibrary('phat chronicles the second, and the third, and the fourth, and the fifth, and the sixth', 'visal ken', 42069, false)
+addBookToLibrary('ren', 'help', 2, true)
+addBookToLibrary('Super Duper Long Text Here', 'Even More Super Duper Long Text Here It Keeps Going!', 9999999999, false)
 
 showLibrary()
 

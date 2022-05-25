@@ -90,9 +90,10 @@ function showLibrary() {
 }
 
 function focusMain(e) {
-    e.preventDefault()
-    container.removeChild(container.querySelector('.dim'))
+    const dim = container.querySelector('.dim')
+    container.removeChild(dim)
     addBookForm.classList.add('hidden')
+    addBookForm.reset()
 }
 
 

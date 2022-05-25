@@ -4,7 +4,7 @@ const addBookForm = document.querySelector('.add-book-form')
 const addBookBtn = document.querySelector('.add-book')
 const closeBookForm = document.querySelector('.close-book-form')
 
-let myLibrary = []
+let myLibrary = JSON.parse(window.localStorage.getItem('myLibrary')) || []
 
 function Book(title, author, pages, read) {
     this.name = title
@@ -21,6 +21,7 @@ function Book(title, author, pages, read) {
 function addBookToLibrary(title, author, pages, read) {
     let book = new Book(title, author, pages, read)
     myLibrary.push(book)
+    window.localStorage.setItem('myLibrary', JSON.stringify(myLibrary))
 }
 
 

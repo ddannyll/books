@@ -23,7 +23,7 @@ function addBookToLibrary(title, author, pages, read) {
     myLibrary.push(book)
 }
 
-function createBookElement(title, author, pages, read) {
+function createBookElement(title, author, pages, read, id) {
     const bookCard = document.createElement('div')
     bookCard.className = 'book-card'
     
@@ -42,24 +42,12 @@ function createBookElement(title, author, pages, read) {
 
     // -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
     // Read Switch Toggle
-    const readLabel = document.createElement('label')
-    readLabel.setAttribute('for', 'read')
-    readLabel.innerText = 'Has been read'
-    bookCard.appendChild(readLabel)
-
-    const readSwitch = document.createElement('div')
-    readSwitch.className = 'switch'
-
-    const readCheck = document.createElement('input') 
-    readCheck.type = 'checkbox'
-    readCheck.name = 'read'
-    readSwitch.appendChild(readCheck)
-
-    const readSlider = document.createElement('span')
-    readSlider.className = 'slider'
-    readSwitch.appendChild(readSlider)
-
-    bookCard.appendChild(readSwitch)
+    const switchLabel = document.createElement('label')
+    switchLabel.setAttribute('for', `switch-${id}`)
+    switchLabel.className = 'switch'
+    switchLabel.innerHTML = `<input class="switch-input" type="checkbox" id="switch-${id}"> 
+                             <div class="switch-fill"><p>Unread</p><p>Read</p></div>`
+    bookCard.appendChild(switchLabel)
 
     // -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
 
@@ -79,9 +67,11 @@ function showLibrary() {
     }
 
     // Add books to books-container HTML
-    for (let book of myLibrary) {
-        const bookCard = createBookElement(book.name, book.author, book.pages, book.read)
+    for (let i = 0; i < myLibrary.length; i++) {
+        book = myLibrary[i]
+        const bookCard = createBookElement(book.name, book.author, book.pages, book.read, i)
         booksContainer.appendChild(bookCard)
+
     }
 }
 
@@ -89,6 +79,10 @@ function focusMain() {
     container.removeChild(container.querySelector('.dim'))
     addBookForm.classList.add('hidden')
 }
+
+
+// -.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.-.
+// Event Listeners
 
 addBookForm.addEventListener('submit', (e) => {
     e.preventDefault()

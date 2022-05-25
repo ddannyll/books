@@ -1,5 +1,5 @@
 body {
-    font-family: 'Plus Jakarta Sans';
+    font-family: 'Raleway';
 }
 
 h1 {
@@ -118,28 +118,72 @@ input[type="submit"]:active {
     Read Switch CSS */
 
 .switch {
-    position: relative;
+    --width: 160px;
+    --height: calc(var(--width)/4);
+    --border-radius: calc(var(--height)/2);
     display: inline-block;
-    width: 100px;
-    height: 50px;
-
-    background-color: lightblue;
+    cursor: pointer;
 }
 
+.switch-input {
+    display: none;
+}
 
+.switch-fill {
+    position: relative;
+    width: var(--width);
+    height: var(--height);
+    border-radius: var(--border-radius);
+    background-color: #DDD;
+    transition: background 0.2s;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+}
 
-.slider {
+.switch-fill>* {
+    display: inline;
+    text-align: center;
+    font-size: 0.8rem;
+    z-index: 10;
+    font-weight: bold;
+}
+
+.switch-fill>*:last-child {
+    color: #666;
+}
+
+.switch-fill>*:first-child {
+    color: #666;
+}
+
+.switch-input:checked ~ .switch-fill>*:last-child {
+    color: #05DCA2;
+}
+
+.switch-input:checked ~ .switch-fill>*:first-child {
+    color: white;
+}
+
+.switch-input:checked ~ .switch-fill {
+    background-color:#05DCA2;
+}
+
+.switch-fill::after { /* creates a virtual element after switch-fill*/
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: #ccc;
-    width: 45px;
-    height: 45px;
+    height: calc(var(--height));
+    width: calc(var(--width)/2);
+    background-color: white;
+    border-radius: var(--border-radius);
+    box-shadow: 0 0 10px rgba(0,0,0,0.25);
+    transition: left 0.2s;
 }
 
-.slider:before {
-    left: 4px;
-    bottom: 1px;
+.switch-input:checked ~ .switch-fill::after {
+    left: calc(var(--width)/2 + 1px);
 }
+
+/*  -.-.-.-.-.-.-.-.-.-.-.-
